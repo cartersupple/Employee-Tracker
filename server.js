@@ -12,7 +12,7 @@ const db = mysql.createConnection(
 );
 db.connect(function(err) {
     if (err) throw err;
-    promptUser();
+    Prompts();
   });
 function Prompts() {
     return inquirer.prompt([
@@ -90,4 +90,65 @@ function Prompts() {
             Prompts()
           });
     }
-
+    function addEmployee(){
+        return inquirer.prompt([
+            {
+              name: 'firstName',
+              type: 'input',
+              message: 'Enter the first name of employee.',
+              validate: (answer) => {
+                if (answer !== '') {
+                  return true;
+                }
+                return 'Enter a value to continue..';
+              }
+            },
+            {
+                name: 'lastName',
+                type: 'input',
+                message: 'Enter the last name of employee.',
+                validate: (answer) => {
+                    if (answer !== '') {
+                      return true;
+                    }
+                    return 'Enter a value to continue..';
+                  }
+            },
+            {
+                name: 'roleId',
+                type: 'input',
+                message: 'Enter the role ID of employee.',
+                validate: (answer) => {
+                    if (answer !== '') {
+                      return true;
+                    }
+                    return 'Enter a value to continue..';
+                  }
+            },
+            {
+                name: 'managerId',
+                type: 'input',
+                message: 'Enter the manager ID of employee.',
+                validate: (answer) => {
+                    if (answer !== '') {
+                      return true;
+                    }
+                    return 'Enter a value to continue..';
+                  }
+            }
+        ]).then(function (res) {
+            db.query("INSERT INTO Employee SET ?",
+                {
+                    first_name: res.firstName,
+                    last_name: res.lastName,
+                    manager_id: res.managerId,
+                    role_id: res.roleId
+                }, 
+                function (err) {
+                    if (err) throw err
+                    console.table(res)
+                    Prompts();
+                });
+            });
+    };
+    
