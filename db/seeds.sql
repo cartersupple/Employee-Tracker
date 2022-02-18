@@ -12,11 +12,11 @@ VALUES
 ('Elongated', 'Musk', 5, 5),
 INSERT INTO roles (title, salary, department_id)
 VALUES
-('CEO',1000000000 , 1),
-('Manager', 1000000, 2),
-('Clerk', 100000, 3),
-('Commoner', 1000, 4),
-('Peasant', 100, 5),
+('CEO',10, 1),
+('Manager', 8, 2),
+('Clerk', 6, 3),
+('Commoner', 4, 4),
+('Peasant', 2, 5),
   INSERT INTO department (id, name)
 VALUES
 (1, 'Armored Division'),
