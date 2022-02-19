@@ -45,7 +45,7 @@ function Prompts() {
                     Roles();
                 break;
     
-                case 'add departement':
+                case 'add department':
                     addDepartment();
                 break;
     
@@ -75,7 +75,7 @@ function Prompts() {
           });
     }
     function Departments(){
-        const sql = `SELECT * FROM departments`
+        const sql = `SELECT * FROM department`
         db.query(sql, (err, res) => {
             if (err) throw err
             console.table(res)
@@ -136,13 +136,105 @@ function Prompts() {
                     return 'Enter a value to continue..';
                   }
             }
-        ]).then(function (res) {
+        ])
+        
+        .then(function (res) {
             db.query("INSERT INTO Employee SET ?",
                 {
                     first_name: res.firstName,
                     last_name: res.lastName,
                     manager_id: res.managerId,
                     role_id: res.roleId
+                }, 
+                function (err) {
+                    if (err) throw err
+                    console.table(res)
+                    Prompts();
+                });
+            });
+    };
+    function addDepartment(){
+        return inquirer.prompt([
+            {
+                name: 'ID',
+                type: 'input',
+                message: 'Enter the ID of the new department',
+                validate: (answer) => {
+                    if (answer !== '') {
+                      return true;
+                    }
+                    return 'Enter a value to continue..';
+                  }
+            },
+            {
+              name: 'Name',
+              type: 'input',
+              message: 'Enter the name of the new department.',
+              validate: (answer) => {
+                if (answer !== '') {
+                  return true;
+                }
+                return 'Enter a value to continue..';
+              }       
+            },         
+        ])
+        
+        .then(function (res) {
+            db.query("INSERT INTO department SET ?",
+                {
+                    id: res.ID,
+                    name: res.Name,
+                }, 
+                function (err) {
+                    if (err) throw err
+                    console.table(res)
+                    Prompts();
+                });
+            });
+    };
+    function addRole(){
+        return inquirer.prompt([
+            {
+                name: 'Title',
+                type: 'input',
+                message: 'Enter the title of the new role',
+                validate: (answer) => {
+                    if (answer !== '') {
+                      return true;
+                    }
+                    return 'Enter a value to continue..';
+                  }
+            },
+            {
+                name: 'Salary',
+                type: 'input',
+                message: 'Enter the salary of the new role',
+                validate: (answer) => {
+                    if (answer !== '') {
+                      return true;
+                    }
+                    return 'Enter a value to continue..';
+                  }
+            },
+            {
+                name: 'departmentId',
+                type: 'input',
+                message: 'Enter the id of the new role',
+                validate: (answer) => {
+                    if (answer !== '') {
+                      return true;
+                    }
+                    return 'Enter a value to continue..';
+                  }
+            },
+        ])
+        
+        .then(function (res) {
+            db.query("INSERT INTO roles SET ?",
+                {
+                    title: res.Title,
+                    salary: res.Salary,
+                    department_id: res.departmentId
                 }, 
                 function (err) {
                     if (err) throw err

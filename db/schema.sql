@@ -10,7 +10,6 @@ CREATE TABLE employee (
   manager_id INTEGER,
 );
 CREATE TABLE roles (
-  id INTEGER AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR (30),
   salary DECIMAL (6,2),
   department_id INTEGER,
