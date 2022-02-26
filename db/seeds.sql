@@ -9,18 +9,18 @@ VALUES
 ('Jimmy', 'Hendrix', 4, 4),
 ('Buzz', 'Aldrine', 4, 4),
 ('Jeff', 'Bezos', 5, 5),
-('Elongated', 'Musk', 5, 5),
+('Elongated', 'Musk', 5, 5);
 INSERT INTO roles (title, salary, department_id)
 VALUES
 ('CEO',10, 1),
 ('Manager', 8, 2),
 ('Clerk', 6, 3),
 ('Commoner', 4, 4),
-('Peasant', 2, 5),
-  INSERT INTO department (id, name)
+('Peasant', 2, 5);
+INSERT INTO department (id, name)
 VALUES
 (1, 'Armored Division'),
 (2, 'Air Force'),
 (3, 'Cavalry'),
 (4, 'Infantry'),
-(5, 'Cannon Fauder'),
+(5, 'Cannon Fauder');
